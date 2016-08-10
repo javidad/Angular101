@@ -10,13 +10,11 @@
          <div ng-controller="MainCtrl as main">
                 <div class="col-md-4">
                     <h2>Tareas</h2>
-                    <div 
-                    ng-repeat="elto in main.tareas"
-                    ng-click="main.setTareaSeleccionada(elto)"
+                    <tarea 
+                    ng-repeat="tarea in main.tareas"
+                    ng-click="main.setTareaSeleccionada(tarea)"
                     >
-                        <h4>{{elto.titulo}}</h4>
-                        <p>{{elto.descripcion}}</p>
-                    </div>
+                    </tarea>
                     <a class="btn btn-primary" ng-click="main.createTarea()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>

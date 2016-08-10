@@ -1,6 +1,18 @@
 //Fichero app.js
 var miModulo=angular.module('ListaTareas',[]);
-miModulo.factory('ListaTareasHelper', function(){});
+
+miModulo.factory('ListaTareasHelper', function(){
+    var buildIndex=function(source, property){
+        var tempArray=[];
+        for(var i=0, len= source.length; i<len;++i){
+            tempArray[source[i][property]]= source[i];
+        }
+        return tempArray;
+    };
+    return {
+        buildIndex: buildIndex
+    };
+});
 miModulo.service('ListaTareasModel', function(){
     var service= this,
     tareas=[
@@ -33,7 +45,7 @@ miModulo.controller('MainCtrl', function(ListaTareasModel){
     //Definición inicial de tareas
     main.tareas= ListaTareasModel.getTareas();
 
-    
+
 main.createTarea=function(){
     //Con este método añadimos un elemento a un array
     main.tareas.push({
@@ -50,4 +62,10 @@ main.createTarea=function(){
 });
 
 
-miModulo.directive('tarea', function(){});
+miModulo.directive('tarea', function(){
+    return{
+        scope: true,
+        replace: true,
+        template: '<div><h4>{{tarea.titulo}}</h4><p>{{tarea.descripcion}}</p></div>'
+    }
+});
