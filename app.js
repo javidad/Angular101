@@ -1,12 +1,9 @@
 //Fichero app.js
 var miModulo=angular.module('ListaTareas',[]);
 miModulo.factory('ListaTareasHelper', function(){});
-miModulo.service('ListaTareasService', function(){});
-miModulo.controller('MainCtrl', function(){
-
-    var main= this;
-    //Definición inicial de tareas
-    main.tareas=[
+miModulo.service('ListaTareasModel', function(){
+    var service= this,
+    tareas=[
         {titulo: 'Primera tarea',
         descripcion: 'La primera tarea',
         criterio: 'Pendiente de definir',
@@ -26,7 +23,19 @@ miModulo.controller('MainCtrl', function(){
 
 }
     ];
+    service.getTareas=function(){
+        return tareas;
+    };
+});
+miModulo.controller('MainCtrl', function(ListaTareasModel){
+
+    var main= this;
+    //Definición inicial de tareas
+    main.tareas= ListaTareasModel.getTareas();
+
+    
 main.createTarea=function(){
+    //Con este método añadimos un elemento a un array
     main.tareas.push({
     titulo: 'Nueva',
         descripcion: 'Sin descripcion',
